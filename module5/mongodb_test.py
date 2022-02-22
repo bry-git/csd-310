@@ -1,4 +1,3 @@
-from http import client
 from pymongo import MongoClient
 
 url = "mongodb+srv://admin:admin@cluster0.ahowo.mongodb.net/admin?retryWrites=true&w=majority"
