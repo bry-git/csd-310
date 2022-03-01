@@ -2,7 +2,7 @@ version: "2"
 services: 
   mysql:
     container_name: mysql
-    image: yobasystems/alpine-mariadb:latest
+    image: mysql:8
     restart: unless-stopped
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     environment:
