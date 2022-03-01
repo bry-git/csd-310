@@ -21,10 +21,10 @@ data = [{
 }]
 
 
-def seed_data(collection, data):
+def seed_data(data):
     print("\n -- INSERT STATEMENTS --")
     for doc in data:
-        inserted_id = db.collection.insert_one(doc).inserted_id
-        print(f"Inserted student record {doc['first_name']} {doc['last_name']} into the {collection} collection with document_id: {inserted_id}")
+        inserted_id = db.students.insert_one(doc).inserted_id
+        print(f"Inserted student record {doc['first_name']} {doc['last_name']} into the students collection with document_id: {inserted_id}")
 
-seed_data("students", data)
+seed_data(data)

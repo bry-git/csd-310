@@ -1,0 +1,15 @@
+version: "2" 
+services: 
+  mysql:
+    container_name: mysql
+    image: yobasystems/alpine-mariadb:latest
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    environment:
+      - MYSQL_ROOT_PASSWORD=sqlpass
+      - MYSQL_PASSWORD=sqlpass
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql_user
+    ports:
+      - 3306:3306
+    
