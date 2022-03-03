@@ -4,11 +4,11 @@ CREATE DATABASE pysports;
 
 USE pysports;
 
-DROP USER IF EXISTS 'pysports_user'@'localhost';
+DROP USER IF EXISTS 'pysports_user'@'%';
 
-CREATE USER 'pysports_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'sqlpass';
+CREATE USER 'pysports_user'@'%' IDENTIFIED WITH mysql_native_password BY 'sqlpass';
 
-GRANT ALL PRIVILEGES on pysports.* TO 'pysports_user'@'localhost';
+GRANT ALL PRIVILEGES ON pysports.* TO 'pysports_user'@'%';
 
 # DROP USER IF EXISTS 'pysports_user'@'localhost';
 
