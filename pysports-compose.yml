@@ -8,8 +8,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=sqlpass
       - MYSQL_PASSWORD=sqlpass
-      - MYSQL_DATABASE=mysql
-      - MYSQL_USER=pysports_user
+#      - MYSQL_DATABASE=pysports
+#      - MYSQL_USER=pysports_user
     ports:
       - 3306:3306
     volumes:
