@@ -1,0 +1,39 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text></help_text><element><id>UMLClass</id><coordinates><x>580</x><y>253</y><w>230</w><h>80</h></coordinates><panel_attributes>_object: Wishlist_
+--
+PK wishlist_id: INT NOT NULL AI
+FK user_id: INT NOT NULL
+FK book_id: INT NOT NULL
+ 
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>253</y><w>230</w><h>80</h></coordinates><panel_attributes>_object: User_
+--
+PK user_id: INT NOT NULL AI
+first_name: VARCHAR(75) NOT NULL
+last_name: VARCHAR(75) NOT NULL
+ 
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>403</y><w>240</w><h>100</h></coordinates><panel_attributes>_object: Book_
+--
+PK book_id: INT NOT NULL AI
+book_name: VARCHAR(200) NOT NULL
+details: VARCHAR(500)
+author VARCHAR(200) NOT NULL
+ 
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>710</x><y>463</y><w>240</w><h>70</h></coordinates><panel_attributes>_object: Store_
+--
+PK store_id: INT NOT NULL AI
+locale: VARCHAR(500) NOT NULL
+
+ 
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>306</x><y>273</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*
+one user has many books on their wishlist</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>376</x><y>323</y><w>350</w><h>130</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=*
+many users wishlist can have many books</panel_attributes><additional_attributes>10;100;330;100;330;10</additional_attributes></element><element><id>Relation</id><coordinates><x>386</x><y>473</y><w>340</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=*
+whatABook can own many stores that own many books</panel_attributes><additional_attributes>10;20;320;20</additional_attributes></element></diagram>

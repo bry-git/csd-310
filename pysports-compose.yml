@@ -13,5 +13,5 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./initdb.d/:/docker-entrypoint-initdb.d/
+      - ./pysports-initdb.d/:/docker-entrypoint-initdb.d/
     
