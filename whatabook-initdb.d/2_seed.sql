@@ -14,7 +14,7 @@ VALUES
     ('Moby Dick', ' First published in 1851, Melvilles masterpiece is, in Elizabeth Hardwicks words, "the greatest novel in American literature." The saga of Captain Ahab and his monomaniacal pursuit of the white whale', 'Herman Melville'),
     ('Don Quixote', 'Alonso Quixano, a retired country gentleman in his fifties, lives in an unnamed section of La Mancha with his niece and a housekeeper. He has become obsessed with books of chivalry', 'Miguel de Cervantes'),
     ('One Hundred Years of Solitude', 'One of the 20th century''s enduring works, One Hundred Years of Solitude is a widely beloved and acclaimed novel known throughout the world', 'Gabriel Garcia Marquez'),
-    (' King Lear', 'King Lear is a tragedy by William Shakespeare, believed to have been written between 1603 and 1606. It is considered one of his greatest works.', 'William Shakespeare'),
+    ('King Lear', 'King Lear is a tragedy by William Shakespeare, believed to have been written between 1603 and 1606. It is considered one of his greatest works.', 'William Shakespeare'),
     ('The Odyssey', 'The Odyssey is one of two major ancient Greek epic poems attributed to Homer. It is, in part, a sequel to the Iliad, the other work traditionally ascribed to Homer.', 'Homer'),
     ('Pride and Prejudice', 'The book is narrated in free indirect speech following the main character Elizabeth Bennet as she deals with matters of upbringing, marriage, moral rightness and education in her aristocratic society', 'Jane Austen');
 

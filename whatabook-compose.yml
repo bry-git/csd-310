@@ -10,6 +10,6 @@ services:
       - MYSQL_USER=whatabook_user
       - MYSQL_PASSWORD=MySQL8IsGreat!
     ports:
-      - 3306:3306
+      - 33306:3306
     volumes:
       - ./whatabook-initdb.d/:/docker-entrypoint-initdb.d/
