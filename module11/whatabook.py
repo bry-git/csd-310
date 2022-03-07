@@ -103,18 +103,27 @@ class Whatabook:
         cursor.execute(query)
         books = cursor.fetchall()
         print(f"\n -- SELECT A BOOK TO ADD --\n")
+
         i = 1
         for book in books:
             print(f"[{i}] {book[1]} by {book[3]}")
             print(f"    about: {book[2]}")
             i += 1
-        selected_book = int(input("enter the corresponding number to add the book to your wishlist: "))
-        target_book_id = int(books[selected_book - 1][0])
-        print(target_book_id)
-        cursor = self.db.cursor()
-        query = f"INSERT INTO wishlist (user_id, book_id) VALUES ({self.user_id}, {target_book_id})"
-        cursor.execute(query)
-        self.db.commit()
+
+        selected_book = input("enter the corresponding number to add the book to your wishlist: ")
+        pattern = re.compile(r"^[0-9]+$")  # numbers in string format only
+
+        if re.match(pattern, f"{selected_book}"):
+            target_book_id = int(books[int(selected_book) - 1][0])
+            print(target_book_id)
+            cursor = self.db.cursor()
+            query = f"INSERT INTO wishlist (user_id, book_id) VALUES ({self.user_id}, {target_book_id})"
+            cursor.execute(query)
+            self.db.commit()
+        else:
+            print(f"\n {selected_book} is not a valid option")
+            input(f"press enter key to continue")
+            self.add_books_to_wishlist()
 
     def next(self): # tries to make space between interface changes
         for i in range(5):
