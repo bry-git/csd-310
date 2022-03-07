@@ -2,19 +2,40 @@ import mysql.connector
 import re
 from mysql.connector import errorcode
 
-config = {
+configA = {
     'user': "whatabook_user",
     "password": "MySQL8IsGreat!",
     "host": "127.0.0.1",
-    "port": 33306, # changed to make it easier for peers to review
+    "port": 3306, # check for mysql on host
     "database": "whatabook",
     "raise_on_warnings": True
 }
 
 
+configB = {
+    'user': "whatabook_user",
+    "password": "MySQL8IsGreat!",
+    "host": "127.0.0.1",
+    "port": 33306, # mysql in docker
+    "database": "whatabook",
+    "raise_on_warnings": True
+}
+
+#check if mysql is running on host or in docker
+_db = None
+try:
+    print("trying to connect to database on host...")
+    _db = mysql.connector.connect(**configA)
+
+except mysql.connector.Error as err:
+    print("trying to connect to docker database...")
+    _db = mysql.connector.connect(**configB)
+
+
+#build the program with OOP
 class Whatabook:
     def __init__(self):
-        self.db = mysql.connector.connect(**config)
+        self.db = _db # whatabook.db assigned to whichever connection type was successful
         self.user = None
         self.user_id = None
 
@@ -29,6 +50,7 @@ class Whatabook:
                           f"   [4] Exit Program \n"
                           f"-- Logged-in as: {logged_in} \n"
                           f" ")
+        # take in valid input or recursively give the user another chance
         if re.match(pattern, selection):
             return selection
         else:
@@ -51,9 +73,10 @@ class Whatabook:
             pattern = re.compile(r"^[0-9]+$")  # numbers in string format only
             user_id = input("please enter your user ID: ")
 
+            # take in valid input or recursively give the user another chance
             if re.match(pattern, user_id):
                 cursor = self.db.cursor()
-                query = f"SELECT * FROM user WHERE user.user_id = {int(user_id)}"
+                query = f"SELECT * FROM user WHERE user.user_id = {int(user_id)}" #get user from table by entered id
                 cursor.execute(query)
                 result = cursor.fetchall()
                 if result:
@@ -82,7 +105,16 @@ class Whatabook:
                               f"   [1] View Wishlist \n"
                               f"   [2] Add books to Wishlist \n"
                               f"   [3] Exit to Main Menu \n")
-        return sub_selection
+
+        pattern = re.compile(r"^[0-9]+$")  # numbers in string format only
+        # take in valid input or recursively give the user another chance
+        if re.match(pattern, sub_selection):
+            return sub_selection
+        else:
+            print(f"{sub_selection} is not a valid option")
+            input("press enter to continue")
+            self.next()
+            self.show_account_menu()
 
     def show_wishlist(self):
         cursor = self.db.cursor()
@@ -104,15 +136,16 @@ class Whatabook:
         books = cursor.fetchall()
         print(f"\n -- SELECT A BOOK TO ADD --\n")
 
-        i = 1
-        for book in books:
-            print(f"[{i}] {book[1]} by {book[3]}")
-            print(f"    about: {book[2]}")
+        i = 1 # counter for terminal output
+        for book in books: # iterate over books
+            print(f"[{i}] {book[1]} by {book[3]}") # title and author
+            print(f"    about: {book[2]}") # book.details
             i += 1
 
         selected_book = input("enter the corresponding number to add the book to your wishlist: ")
         pattern = re.compile(r"^[0-9]+$")  # numbers in string format only
 
+        # take in valid input or recursively give the user another chance
         if re.match(pattern, f"{selected_book}"):
             target_book_id = int(books[int(selected_book) - 1][0])
             print(target_book_id)
@@ -125,7 +158,7 @@ class Whatabook:
             input(f"press enter key to continue")
             self.add_books_to_wishlist()
 
-    def next(self): # tries to make space between interface changes
+    def next(self): # tries to make space between UI changes
         for i in range(5):
             print("\n")
 
@@ -177,5 +210,5 @@ class Whatabook:
             self.db.close()
 
 
-w = Whatabook()
+w = Whatabook() # make an instance
 w.main() # run the driver function

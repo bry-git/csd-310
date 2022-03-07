@@ -1,12 +1,12 @@
 # csd-310
 
 ### Running whatabook.py
-- mysql database is made with docker, to stand up the database, you must have docker running, then from a teminal at the project root, run:
+> with the latest change to `main`, you can run the main program wether you have mysql running on the host (you must run whatabook-initdb.d/ scripts) or in docker 
+- the mysql database is made with docker, to stand up the database, you must have docker running, then from a teminal at the project root, run:
 
 `
 docker-compose -f whatabook-compose.ym up -d
 `
-> the mysql port has been changed to 33306 in case mysql is running on your OS
 - once your finished with the project, to clean up run:
 
 `docker-compose -f whatabook-compose.yml down`
