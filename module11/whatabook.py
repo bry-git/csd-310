@@ -39,6 +39,7 @@ class Whatabook:
         self.user = None
         self.user_id = None
 
+    # print the main menu
     def show_menu(self):
         logged_in = self.user if self.user is not None else "not logged in"
         pattern = re.compile(r"^[0-9]+$")  # numbers in string format only
@@ -58,6 +59,7 @@ class Whatabook:
             print(f"{selection}not a valid option")
             self.main()
 
+    # show all the books in the whatabook system
     def show_books(self):
         query = f"SELECT book_name, author FROM book"
         cursor = self.db.cursor()
@@ -68,6 +70,7 @@ class Whatabook:
         for book in books:
             print(f"{book[0]} by {book[1]}")
 
+    # take in a user id and check it against the database
     def validate_user(self):
         if self.user_id is None:
             pattern = re.compile(r"^[0-9]+$")  # numbers in string format only
@@ -91,6 +94,7 @@ class Whatabook:
                 print(f"{user_id} is not a valid user ID")
                 self.validate_user()
 
+    # give the user all the locations in the database
     def show_locations(self):
         cursor = self.db.cursor()
         query = f"SELECT locale FROM store"
@@ -99,6 +103,7 @@ class Whatabook:
         for store in stores:
             print(f"{store[0]}")
 
+    # user account specific menu
     def show_account_menu(self):
         sub_selection = input(f"Welcome {self.user}! userID: {self.user_id}\n"
                               f"Please select an operation: \n"
@@ -116,6 +121,7 @@ class Whatabook:
             self.next()
             self.show_account_menu()
 
+    # show the users book wishlist
     def show_wishlist(self):
         cursor = self.db.cursor()
         # cant get query to work without 'SELECT *', cant figure out why
@@ -124,11 +130,12 @@ class Whatabook:
         wishlist = cursor.fetchall()
         self.next()
         print("\n-- DISPLAYING WISHLIST --\n")
-        i = 1
-        for wish in wishlist:
+        i = 1 # counter
+        for wish in wishlist: # iterate over each book in the wishlist
             print(f"[{i}] {wish[4]} by {wish[6]}")
             i += 1
 
+    # query database for all books minus books that are already in the users wishlist, then add selected books to the wishlist
     def add_books_to_wishlist(self):
         cursor = self.db.cursor()
         query = f"SELECT book_id, book_name, details, author FROM book b WHERE b.book_id NOT IN (SELECT book_id FROM wishlist w WHERE w.user_id = {self.user_id});"
@@ -163,7 +170,7 @@ class Whatabook:
             print("\n")
 
     # driver function
-    def main(self, selection='0'):
+    def main(self, selection='0'): # make this function have a default selection that can be overridden if the user is logged in
         try:
             if selection == '0':
                 selection = self.show_menu()
